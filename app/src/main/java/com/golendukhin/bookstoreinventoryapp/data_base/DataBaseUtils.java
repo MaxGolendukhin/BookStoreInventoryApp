@@ -6,6 +6,9 @@ import android.database.sqlite.SQLiteDatabase;
 
 public final class DataBaseUtils {
 
+    /**
+     * Populates app with fake data to demonstrate database works correctly
+     */
     public static void insertData(Context context) {
         BooksInventoryDBHelper booksInventoryDBHelper = new BooksInventoryDBHelper(context);
         SQLiteDatabase sqLiteDatabase = booksInventoryDBHelper.getReadableDatabase();

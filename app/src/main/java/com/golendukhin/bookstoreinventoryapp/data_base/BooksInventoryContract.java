@@ -2,9 +2,15 @@ package com.golendukhin.bookstoreinventoryapp.data_base;
 
 import android.provider.BaseColumns;
 
+import com.golendukhin.bookstoreinventoryapp.R;
+
 public final class BooksInventoryContract {
 
+    /**
+     * Empty constructor to avoid class initialization
+     */
     BooksInventoryContract() {
+        throw new AssertionError(R.string.util_exception_instantiation);
     }
 
     public final static class BooksEntry implements BaseColumns {

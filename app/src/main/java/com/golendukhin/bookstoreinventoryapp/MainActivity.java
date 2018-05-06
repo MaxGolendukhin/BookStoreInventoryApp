@@ -2,16 +2,15 @@ package com.golendukhin.bookstoreinventoryapp;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.golendukhin.bookstoreinventoryapp.data_base.BooksInventoryContract;
+import com.golendukhin.bookstoreinventoryapp.data_base.BooksInventoryContract.BooksEntry;
 import com.golendukhin.bookstoreinventoryapp.data_base.BooksInventoryDBHelper;
 import com.golendukhin.bookstoreinventoryapp.data_base.DataBaseUtils;
-import com.golendukhin.bookstoreinventoryapp.data_base.BooksInventoryContract.BooksEntry;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,10 +38,13 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Displays content of database
+     */
     private void displayDatabaseContent() {
         BooksInventoryDBHelper booksInventoryDBHelper = new BooksInventoryDBHelper(this);
         SQLiteDatabase sqLiteDatabase = booksInventoryDBHelper.getReadableDatabase();
-        
+
         String table = BooksEntry.TABLE_NAME;
         Cursor cursor = sqLiteDatabase.query(table, null, null, null, null, null, null);
 
