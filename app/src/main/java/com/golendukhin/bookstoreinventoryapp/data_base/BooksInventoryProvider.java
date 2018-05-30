@@ -69,15 +69,13 @@ public class BooksInventoryProvider extends ContentProvider {
         int match = sUriMatcher.match(uri);
         switch (match) {
             case BOOKS:
-                cursor = sqLiteDatabase.query(BooksInventoryContract.BooksEntry.TABLE_NAME,
-                        projection, selection, selectionArgs, null, null, sortOrder);
+                cursor = sqLiteDatabase.query(BooksEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             case BOOK_ID:
-                selection = BooksInventoryContract.BooksEntry._ID + "=?";
+                selection = BooksEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
 
-                cursor = sqLiteDatabase.query(BooksInventoryContract.BooksEntry.TABLE_NAME,
-                        projection, selection, selectionArgs, null, null, sortOrder);
+                cursor = sqLiteDatabase.query(BooksEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             default:
                 throw new IllegalArgumentException("Cannot query unknown URI " + uri);
@@ -94,9 +92,9 @@ public class BooksInventoryProvider extends ContentProvider {
             final int match = sUriMatcher.match(uri);
             switch (match) {
                 case BOOKS:
-                    return BooksInventoryContract.BooksEntry.CONTENT_LIST_TYPE;
+                    return BooksEntry.CONTENT_LIST_TYPE;
                 case BOOK_ID:
-                    return BooksInventoryContract.BooksEntry.CONTENT_ITEM_TYPE;
+                    return BooksEntry.CONTENT_ITEM_TYPE;
                 default:
                     throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
             }
@@ -109,17 +107,17 @@ public class BooksInventoryProvider extends ContentProvider {
     @Override
     public Uri insert(Uri uri, ContentValues contentValues) {
         // Check that the name is not null
-        String name = contentValues.getAsString(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_PRODUCT_NAME);
+        String name = contentValues.getAsString(BooksEntry.COLUMN_BOOKS_PRODUCT_NAME);
         if (name == null) {
             throw new IllegalArgumentException("Book requires a name");
         }
 
-        Integer price = contentValues.getAsInteger(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_PRICE);
+        Integer price = contentValues.getAsInteger(BooksEntry.COLUMN_BOOKS_PRICE);
         if (price != null && price < 0 ) {
             throw new IllegalArgumentException("Book price has to be positive number");
         }
 
-        Integer quantity = contentValues.getAsInteger(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_QUANTITY);
+        Integer quantity = contentValues.getAsInteger(BooksEntry.COLUMN_BOOKS_QUANTITY);
         if (quantity != null && quantity < 0) {
             throw new IllegalArgumentException("Books item quantity has to be more then zero");
         }
@@ -139,7 +137,7 @@ public class BooksInventoryProvider extends ContentProvider {
         SQLiteDatabase database = booksInventoryDBHelper.getWritableDatabase();
 
         // Insert the new pet with the given values
-        long id = database.insert(BooksInventoryContract.BooksEntry.TABLE_NAME, null, contentValues);
+        long id = database.insert(BooksEntry.TABLE_NAME, null, contentValues);
         // If the ID is -1, then the insertion failed. Log an error and return null.
         if (id == -1) {
             Log.e(LOG_TAG, "Failed to insert row for " + uri);
@@ -166,15 +164,13 @@ public class BooksInventoryProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case BOOKS:
-                rowsDeleted = sqLiteDatabase.delete(BooksInventoryContract.BooksEntry.TABLE_NAME,
-                        selection, selectionArgs);
+                rowsDeleted = sqLiteDatabase.delete(BooksEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             case BOOK_ID:
                 // Delete a single row given by the ID in the URI
-                selection = BooksInventoryContract.BooksEntry._ID + "=?";
+                selection = BooksEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                rowsDeleted = sqLiteDatabase.delete(BooksInventoryContract.BooksEntry.TABLE_NAME,
-                        selection, selectionArgs);
+                rowsDeleted = sqLiteDatabase.delete(BooksEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             default:
                 throw new IllegalArgumentException("Deletion is not supported for " + uri);
