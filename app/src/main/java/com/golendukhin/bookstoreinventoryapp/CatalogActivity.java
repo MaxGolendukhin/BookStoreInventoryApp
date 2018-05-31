@@ -4,6 +4,7 @@ import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,8 +18,9 @@ import com.golendukhin.bookstoreinventoryapp.data_base.BooksInventoryDBHelper;
 import com.golendukhin.bookstoreinventoryapp.data_base.DataBaseUtils;
 
 public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
-    private static final String[] PROJECTION = new String[] {BooksEntry.COLUMN_BOOKS_PRODUCT_NAME,
-            BooksEntry.COLUMN_BOOKS_PRICE, BooksEntry.COLUMN_BOOKS_PRICE};
+    private static final String[] PROJECTION = new String[] {BooksEntry._ID,
+            BooksEntry.COLUMN_BOOKS_PRODUCT_NAME,
+            BooksEntry.COLUMN_BOOKS_PRICE, BooksEntry.COLUMN_BOOKS_QUANTITY};
     private static final int BOOKS_LOADER = 0;
     private BooksInventoryCursorAdapter booksInventoryCursorAdapter;
 
@@ -28,6 +30,14 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         setContentView(R.layout.activity_catalog);
 
         Cursor cursor = getContentResolver().query(BooksEntry.CONTENT_URI, PROJECTION, null, null, null);
+
+
+        while (cursor.moveToNext()) {
+            String bookTitle = cursor.getString(cursor.getColumnIndexOrThrow(BooksEntry.COLUMN_BOOKS_PRODUCT_NAME));
+            int a = 0;
+        }
+
+
         booksInventoryCursorAdapter = new BooksInventoryCursorAdapter(this, cursor, 0);
 
         ListView listView = findViewById(R.id.list);

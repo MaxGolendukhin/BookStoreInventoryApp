@@ -16,6 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:authorities="com.golendukhin.bookstoreinventoryapp"
+            android:name=".data_base.BooksInventoryProvider"
+            android:exported="false"/>
     </application>
 
 </manifest>

@@ -14,7 +14,7 @@ import android.util.Log;
 
 import com.golendukhin.bookstoreinventoryapp.data_base.BooksInventoryContract.BooksEntry;
 
-//import static com.golendukhin.bookstoreinventoryapp.data_base.BooksInventoryContract.BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE_NUMBER;
+
 
 public class BooksInventoryProvider extends ContentProvider {
 
