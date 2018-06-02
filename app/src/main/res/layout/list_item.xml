@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="@dimen/activity_margin">
+    android:padding="@dimen/regular_margin">
 
     <TextView
         android:id="@+id/book_title"
@@ -15,7 +15,6 @@
         android:fontFamily="sans-serif-medium"
         android:textAppearance="?android:textAppearanceMedium"
         android:textColor="#2B3D4D"
-        android:text="Jerome K. Jerome. Three Men in a Boat (To say Nothing Of The Dog"
         android:layout_gravity="center_vertical"/>
 
     <LinearLayout

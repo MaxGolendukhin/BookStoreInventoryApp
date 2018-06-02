@@ -30,16 +30,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         setContentView(R.layout.activity_catalog);
 
         Cursor cursor = getContentResolver().query(BooksEntry.CONTENT_URI, PROJECTION, null, null, null);
-
-
-        while (cursor.moveToNext()) {
-            String bookTitle = cursor.getString(cursor.getColumnIndexOrThrow(BooksEntry.COLUMN_BOOKS_PRODUCT_NAME));
-            int a = 0;
-        }
-
-
         booksInventoryCursorAdapter = new BooksInventoryCursorAdapter(this, cursor, 0);
-
         ListView listView = findViewById(R.id.list);
         listView.setAdapter(booksInventoryCursorAdapter);
 
@@ -124,6 +115,5 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         booksInventoryCursorAdapter.swapCursor(null);
-
     }
 }
