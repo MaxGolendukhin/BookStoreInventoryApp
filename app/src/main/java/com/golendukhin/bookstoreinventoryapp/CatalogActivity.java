@@ -1,21 +1,25 @@
 package com.golendukhin.bookstoreinventoryapp;
 
 import android.app.LoaderManager;
+import android.content.ContentUris;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
-import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.golendukhin.bookstoreinventoryapp.data_base.BooksInventoryContract.BooksEntry;
-import com.golendukhin.bookstoreinventoryapp.data_base.BooksInventoryDBHelper;
 import com.golendukhin.bookstoreinventoryapp.data_base.DataBaseUtils;
+
+import static com.golendukhin.bookstoreinventoryapp.data_base.BooksInventoryContract.BooksEntry.CONTENT_URI;
 
 public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private static final String[] PROJECTION = new String[] {BooksEntry._ID,
@@ -24,15 +28,37 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     private static final int BOOKS_LOADER = 0;
     private BooksInventoryCursorAdapter booksInventoryCursorAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_catalog);
+        setContentView(R.layout.catalog_activity);
 
-        Cursor cursor = getContentResolver().query(BooksEntry.CONTENT_URI, PROJECTION, null, null, null);
+        Cursor cursor = getContentResolver().query(CONTENT_URI, PROJECTION, null, null, null);
         booksInventoryCursorAdapter = new BooksInventoryCursorAdapter(this, cursor, 0);
         ListView listView = findViewById(R.id.list);
         listView.setAdapter(booksInventoryCursorAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(CatalogActivity.this, DetailsActivity.class);
+                Uri uri = ContentUris.withAppendedId(CONTENT_URI, l);
+                intent.setData(uri);
+                startActivity(intent);
+            }
+        });
+
+        FloatingActionButton floatingActionButton = findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CatalogActivity.this, DetailsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         getLoaderManager().initLoader(BOOKS_LOADER, null, this);
     }
@@ -104,7 +130,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return new CursorLoader(this, BooksEntry.CONTENT_URI, PROJECTION, null, null, null);
+        return new CursorLoader(this, CONTENT_URI, PROJECTION, null, null, null);
     }
 
     @Override

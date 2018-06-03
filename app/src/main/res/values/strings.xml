@@ -10,4 +10,13 @@
     <string name="add_item">+1 item</string>
     <string name="suppler">Supplier:</string>
     <string name="suppler_phone">Supplier phone:</string>
+    <string name="add_book_title">Add new book</string>
+    <string name="details_book_title">Book details</string>
+    <string name="book_name_edit_text_hint">Enter book name</string>
+    <string name="price_edit_text_hint">0.00</string>
+    <string name="quantity_edit_text_hint">0</string>
+    <string name="supplier_edit_text_hint">Enter supplier name</string>
+    <string name="supplier_phone_edit_text_hint">Enter supplier phone</string>
+    <string name="action_save">Save</string>
+    <string name="action_delete">Delete</string>
 </resources>
