@@ -8,8 +8,11 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -131,8 +134,119 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     }
 
     private void setEditTextListeners() {
+        nameEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                currentStateBook.setName(editable.toString());
+                invalidateOptionsMenu();
+            }
+        });
+
+        priceEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String priceText = editable.toString();
+                double price;
+
+                if (priceText.equals("") || priceText.equals(".") || priceText.equals("0")) {
+                    price = 0.0;//Double.valueOf(editable.toString());
+                } else {
+                    price = Double.valueOf(editable.toString());
+                }
+
+                currentStateBook.setPrice(price);
+                invalidateOptionsMenu();
+            }
+        });
+
+        priceEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    if (currentStateBook.getPrice() == .0) {
+                        priceEditText.setText("");
+                    }
+                }
+            }
+        });
+
+        quantityEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int quantity  = 0;
+                if (!editable.toString().equals("")) {
+                    quantity = Integer.valueOf(editable.toString());
+                }
+                currentStateBook.setQuantity(quantity);
+                invalidateOptionsMenu();
+            }
+        });
+
+        quantityEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    if (currentStateBook.getQuantity() == 0) {
+                        quantityEditText.setText("");
+                    }
+                }
+            }
+        });
+
+        supplierEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                currentStateBook.setSupplier(editable.toString());
+                invalidateOptionsMenu();
+            }
+        });
+
+        supplierPhoneEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                currentStateBook.setSupplierPhone(editable.toString());
+                invalidateOptionsMenu();
+            }
+        });
     }
-
-
 }
