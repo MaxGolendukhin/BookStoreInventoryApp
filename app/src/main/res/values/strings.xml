@@ -41,7 +41,7 @@
     <string name="keep_editing">Keep Editing</string>
 
     <!-- Toast message when user input more then 2 decimal place value in price field of DetailsActivity [CHAR LIMIT=None] -->
-    <string name="more_than_two_decimal_places_in_price_toast">Price can\'t has more than two decimal places. It will rounded</string>
+    <string name="more_than_two_decimal_places_in_price_toast">Price can\'t has more than two decimal places. It will be rounded</string>
 
 
 

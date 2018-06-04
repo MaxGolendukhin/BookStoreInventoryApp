@@ -62,8 +62,8 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             setTitle(R.string.add_book_title);
             initialStateBook = new Book();
             currentStateBook = new Book();
-            //invalidateOptionsMenu();
         } else {
+
             setTitle(R.string.details_book_title);
             getLoaderManager().initLoader(BOOKS_LOADER, null, this);
         }
@@ -87,14 +87,6 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
 
         setButtonsListeners();
 
-
-//todo add if needed
-//        mNameEditText.setOnTouchListener(mTouchListener);
-//        mBreedEditText.setOnTouchListener(mTouchListener);
-//        mWeightEditText.setOnTouchListener(mTouchListener);
-//        mGenderSpinner.setOnTouchListener(mTouchListener);
-
-
     }
 
     @Override
@@ -105,7 +97,8 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         if (cursor.moveToFirst()) {
-            currentStateBook = new Book(cursor);
+            initialStateBook = new Book(cursor);
+            currentStateBook = new Book(initialStateBook);
 
             nameEditText.setText(currentStateBook.getName());
             priceEditText.setText(String.valueOf(currentStateBook.getPrice()));

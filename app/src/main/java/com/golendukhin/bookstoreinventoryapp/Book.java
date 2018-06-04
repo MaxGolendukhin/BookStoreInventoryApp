@@ -19,18 +19,18 @@ class Book {
         supplierPhone = "";
     }
 
-    Book(String name, double price, int quantity, String supplier, String supplierPhone) {
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
-        this.supplier = supplier;
-        this.supplierPhone = supplierPhone;
+    Book(Book book) {
+        this.name = book.getName();
+        this.price = book.getPrice();
+        this.quantity = book.getQuantity();
+        this.supplier = book.getSupplier();
+        this.supplierPhone = book.supplierPhone;
     }
 
     Book(Cursor cursor) {
         this.name = cursor.getString(cursor.getColumnIndex(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_PRODUCT_NAME));
         this.price = 1.0 * cursor.getInt(cursor.getColumnIndexOrThrow(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_PRICE)) / 100;
-        this.quantity = cursor.getInt(cursor.getColumnIndexOrThrow(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_PRICE));
+        this.quantity = cursor.getInt(cursor.getColumnIndexOrThrow(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_QUANTITY));
         this.supplier = cursor.getString(cursor.getColumnIndex(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_SUPPLIER_NAME));
         this.supplierPhone = cursor.getString(cursor.getColumnIndex(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE));
     }

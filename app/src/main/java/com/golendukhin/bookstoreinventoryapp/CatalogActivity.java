@@ -41,9 +41,9 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Intent intent = new Intent(CatalogActivity.this, DetailsActivity.class);
-                Uri uri = ContentUris.withAppendedId(CONTENT_URI, l);
+                Uri uri = ContentUris.withAppendedId(CONTENT_URI, id);
                 intent.setData(uri);
                 startActivity(intent);
             }
