@@ -99,14 +99,14 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 //                    BooksEntry.COLUMN_BOOKS_PRICE + " - " +
 //                    BooksEntry.COLUMN_BOOKS_QUANTITY + " - " +
 //                    BooksEntry.COLUMN_BOOKS_SUPPLIER_NAME + " - " +
-//                    BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE_NUMBER + "\n");
+//                    BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE + "\n");
 //
 //            int idColumnIndex = cursor.getColumnIndex(BooksEntry._ID);
 //            int productNameColumnIndex = cursor.getColumnIndex(BooksEntry.COLUMN_BOOKS_PRODUCT_NAME);
 //            int priceColumnIndex = cursor.getColumnIndex(BooksEntry.COLUMN_BOOKS_PRICE);
 //            int quantityColumnIndex = cursor.getColumnIndex(BooksEntry.COLUMN_BOOKS_QUANTITY);
 //            int supplierNameColumnIndex = cursor.getColumnIndex(BooksEntry.COLUMN_BOOKS_SUPPLIER_NAME);
-//            int supplierPhoneNumberColumnIndex = cursor.getColumnIndex(BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE_NUMBER);
+//            int supplierPhoneNumberColumnIndex = cursor.getColumnIndex(BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE);
 //
 //            while (cursor.moveToNext()) {
 //                int currentID = cursor.getInt(idColumnIndex);

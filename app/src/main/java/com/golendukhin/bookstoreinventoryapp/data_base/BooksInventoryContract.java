@@ -48,6 +48,6 @@ public final class BooksInventoryContract {
         public static final String COLUMN_BOOKS_PRICE = "price";
         public static final String COLUMN_BOOKS_QUANTITY = "quantity";
         public static final String COLUMN_BOOKS_SUPPLIER_NAME = "supplierName";
-        public static final String COLUMN_BOOKS_SUPPLIER_PHONE_NUMBER = "supplierPhoneNumber";
+        public static final String COLUMN_BOOKS_SUPPLIER_PHONE = "supplierPhoneNumber";
     }
 }

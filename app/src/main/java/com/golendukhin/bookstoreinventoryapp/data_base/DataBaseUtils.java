@@ -19,7 +19,7 @@ public final class DataBaseUtils {
         contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_PRICE, 599);
         contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_QUANTITY, 35);
         contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_SUPPLIER_NAME, "Books LTD.");
-        contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE_NUMBER, "999-580-56-12");
+        contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE, "999-580-56-12");
         sqLiteDatabase.insert(BooksInventoryContract.BooksEntry.TABLE_NAME, null, contentValues);
         contentValues.clear();
 
@@ -27,7 +27,7 @@ public final class DataBaseUtils {
         contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_PRICE, 255);
         contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_QUANTITY, 41);
         contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_SUPPLIER_NAME, "English Literature Publisher");
-        contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE_NUMBER, "569-956-21-00");
+        contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE, "569-956-21-00");
         sqLiteDatabase.insert(BooksInventoryContract.BooksEntry.TABLE_NAME, null, contentValues);
         contentValues.clear();
 
@@ -35,7 +35,7 @@ public final class DataBaseUtils {
         contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_PRICE, 321);
         contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_QUANTITY, 15);
         contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_SUPPLIER_NAME, "English Literature Publisher");
-        contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE_NUMBER, "569-956-21-00");
+        contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE, "569-956-21-00");
         sqLiteDatabase.insert(BooksInventoryContract.BooksEntry.TABLE_NAME, null, contentValues);
         contentValues.clear();
 
@@ -43,7 +43,7 @@ public final class DataBaseUtils {
         contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_PRICE, 59);
         contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_QUANTITY, 28);
         contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_SUPPLIER_NAME, "Books From All Over The World");
-        contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE_NUMBER, "123-519-56-51");
+        contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE, "123-519-56-51");
         sqLiteDatabase.insert(BooksInventoryContract.BooksEntry.TABLE_NAME, null, contentValues);
         contentValues.clear();
 
@@ -51,7 +51,7 @@ public final class DataBaseUtils {
         contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_PRICE, 123);
         contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_QUANTITY, 10);
         contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_SUPPLIER_NAME, "The Macmillan Company");
-        contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE_NUMBER, "569-250-65-52");
+        contentValues.put(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE, "569-250-65-52");
         sqLiteDatabase.insert(BooksInventoryContract.BooksEntry.TABLE_NAME, null, contentValues);
     }
 }

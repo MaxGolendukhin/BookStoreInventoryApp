@@ -32,7 +32,7 @@ class Book {
         this.price = 1.0 * cursor.getInt(cursor.getColumnIndexOrThrow(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_PRICE)) / 100;
         this.quantity = cursor.getInt(cursor.getColumnIndexOrThrow(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_PRICE));
         this.supplier = cursor.getString(cursor.getColumnIndex(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_SUPPLIER_NAME));
-        this.supplierPhone = cursor.getString(cursor.getColumnIndex(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE_NUMBER));
+        this.supplierPhone = cursor.getString(cursor.getColumnIndex(BooksInventoryContract.BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE));
     }
 
     public String getName() {

@@ -3,13 +3,10 @@ package com.golendukhin.bookstoreinventoryapp.data_base;
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
-import android.content.Intent;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.golendukhin.bookstoreinventoryapp.data_base.BooksInventoryContract.BooksEntry;
@@ -128,7 +125,7 @@ public class BooksInventoryProvider extends ContentProvider {
             throw new IllegalArgumentException("Supplier requires a name");
         }
 
-        String supplierPhoneNumber = contentValues.getAsString(BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE_NUMBER);
+        String supplierPhoneNumber = contentValues.getAsString(BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE);
         if (supplierPhoneNumber == null) {
             throw new IllegalArgumentException("Supplier has to have a phone to contact");
         }
@@ -229,8 +226,8 @@ public class BooksInventoryProvider extends ContentProvider {
             }
         }
 
-        if (contentValues.containsKey(BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE_NUMBER)) {
-            String supplierPhoneNumber = contentValues.getAsString(BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE_NUMBER);
+        if (contentValues.containsKey(BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE)) {
+            String supplierPhoneNumber = contentValues.getAsString(BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE);
             if (supplierPhoneNumber == null) {
                 throw new IllegalArgumentException("Supplier has to have a phone to contact");
             }

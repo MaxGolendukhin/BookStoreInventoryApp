@@ -19,4 +19,37 @@
     <string name="supplier_phone_edit_text_hint">Enter supplier phone</string>
     <string name="action_save">Save</string>
     <string name="action_delete">Delete</string>
+    <string name="insert_book_failed">Adding new book failed</string>
+    <string name="insert_book_successful">Adding new book successful</string>
+    <string name="update_book_successful">Updating book was successful</string>
+    <string name="update_book_failed">Updating book was failed</string>
+    <string name="delete_dialog_msg">Delete this book?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_book_failed">Deleting book was failed</string>
+    <string name="delete_book_successful">Deleting book was successful</string>
+
+
+
+    <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
+    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+
+    <!-- Dialog button text for the option to discard a user's changes [CHAR LIMIT=20] -->
+    <string name="discard">Discard</string>
+
+    <!-- Dialog button text for the option to keep editing the current book [CHAR LIMIT=20] -->
+    <string name="keep_editing">Keep Editing</string>
+
+    <!-- Toast message when user input more then 2 decimal place value in price field of DetailsActivity [CHAR LIMIT=None] -->
+    <string name="more_than_two_decimal_places_in_price_toast">Price can\'t has more than two decimal places. It will rounded</string>
+
+
+
+
+
+
+
+
+
+
 </resources>

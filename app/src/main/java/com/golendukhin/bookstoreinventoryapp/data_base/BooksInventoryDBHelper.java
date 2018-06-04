@@ -25,7 +25,7 @@ public class BooksInventoryDBHelper extends SQLiteOpenHelper {
                 BooksEntry.COLUMN_BOOKS_PRICE + " INTEGER DEFAULT 0, " +
                 BooksEntry.COLUMN_BOOKS_QUANTITY + " INTEGER DEFAULT 0, " +
                 BooksEntry.COLUMN_BOOKS_SUPPLIER_NAME + " TEXT NOT NULL, " +
-                BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE_NUMBER + " TEXT NOT NULL);";
+                BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE + " TEXT NOT NULL);";
 
         sqLiteDatabase.execSQL(SQL_CREATE_ENTRIES);
     }

@@ -30,7 +30,7 @@ public class BooksInventoryCursorAdapter extends CursorAdapter {
 
         String bookTitle = cursor.getString(cursor.getColumnIndexOrThrow(BooksEntry.COLUMN_BOOKS_PRODUCT_NAME));
         String price = "price: $" + String.valueOf(1.0 * cursor.getInt(cursor.getColumnIndexOrThrow(BooksEntry.COLUMN_BOOKS_PRICE)) / 100);
-        String quantity = "quantity: " + String.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow(BooksEntry.COLUMN_BOOKS_PRICE)));
+        String quantity = "quantity: " + String.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow(BooksEntry.COLUMN_BOOKS_QUANTITY)));
 
         bookTitleTextView.setText(bookTitle);
         priceTextView.setText(price);
