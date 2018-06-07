@@ -23,13 +23,18 @@
     <string name="insert_book_successful">Adding new book successful</string>
     <string name="update_book_successful">Updating book was successful</string>
     <string name="update_book_failed">Updating book was failed</string>
+
+    <!-- Toast message when reducing quantity of books in stock by selling one is failed [CHAR LIMIT=None] -->
+    <string name="reducing_quantity_failed">Reducing quantity failed</string>
+
+    <!-- Toast message when reducing quantity of books in stock by selling one is successed [CHAR LIMIT=None] -->
+    <string name="reducing_quantity_success">Book sold</string>
+
     <string name="delete_dialog_msg">Delete this book?</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
     <string name="delete_book_failed">Deleting book was failed</string>
     <string name="delete_book_successful">Deleting book was successful</string>
-
-
 
     <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
     <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
@@ -43,13 +48,15 @@
     <!-- Toast message when user input more then 2 decimal place value in price field of DetailsActivity [CHAR LIMIT=None] -->
     <string name="more_than_two_decimal_places_in_price_toast">Price can\'t has more than two decimal places. It will be rounded</string>
 
+    <!--Prefix in price text view in list item [CHAR LIMIT=20]-->
+    <string name="price_prefix">price: $</string>
 
+    <!--Prefix in quantity text view in list item [CHAR LIMIT=20]-->
+    <string name="quantity_prefix">quantity:\ </string>
 
+    <!--Toast message if the book is out of stock [CHAR LIMIT=None]-->
+    <string name="out_of_stock_toast">Book is out of stock</string>
 
-
-
-
-
-
-
+    <!--Button label sell item in catalog activity [CHAR LIMIT=10]-->
+    <string name="sell_button_label">sell</string>
 </resources>
