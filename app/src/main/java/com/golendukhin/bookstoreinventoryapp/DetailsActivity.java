@@ -179,6 +179,7 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         }
     }
 
+
     private void showDeleteConfirmationDialog() {
         // Create an AlertDialog.Builder and set the message, and click listeners
         // for the positive and negative buttons on the dialog.

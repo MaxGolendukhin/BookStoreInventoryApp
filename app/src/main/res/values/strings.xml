@@ -1,28 +1,75 @@
 <resources>
+    <!-- Name for the application [CHAR LIMIT=12] -->
     <string name="app_name">BookStoreInventoryApp</string>
-    <string name="action_insert_dummy_data">Insert Dummy Data</string>
+
+    <!-- Exception if developer is trying to get instance of static BooksInventoryContract class  [CHAR LIMIT=None] -->
     <string name="util_exception_instantiation">Utils class can not be instantiated</string>
+
+    <!-- Label for price in catalog activity [CHAR LIMIT=12] -->
     <string name="price">Price: $</string>
+
+    <!-- Label for quantity in catalog activity [CHAR LIMIT=12] -->
     <string name="quantity">Quantity: </string>
+
+    <!-- Label for reduce price button in details activity [CHAR LIMIT=12] -->
     <string name="reduce_price">-1 price</string>
+
+    <!-- Label for add price button in details activity [CHAR LIMIT=12] -->
     <string name="add_price">+1 price</string>
+
+    <!-- Label for reduce quantity button in details activity [CHAR LIMIT=12] -->
     <string name="reduce_item">-1 item</string>
+
+    <!-- Label for add quantity button in details activity [CHAR LIMIT=12] -->
     <string name="add_item">+1 item</string>
+
+    <!-- Label for supplier label in details activity [CHAR LIMIT=12] -->
     <string name="suppler">Supplier:</string>
+
+    <!-- Label for supplier phone label in details activity [CHAR LIMIT=12] -->
     <string name="suppler_phone">Supplier phone:</string>
+
+    <!-- Title for details activity in case of adding new book mode [CHAR LIMIT=None] -->
     <string name="add_book_title">Add new book</string>
+
+    <!-- Title for details activity in case of editing book mode [CHAR LIMIT=None] -->
     <string name="details_book_title">Book details</string>
+
+    <!-- Hint for add book name field in details activity [CHAR LIMIT=20] -->
     <string name="book_name_edit_text_hint">Enter book name</string>
+
     <string name="price_edit_text_hint">0.00</string>
     <string name="quantity_edit_text_hint">0</string>
+
+    <!-- Hint for add supplier name field in details activity [CHAR LIMIT=20] -->
     <string name="supplier_edit_text_hint">Enter supplier name</string>
+
+    <!-- Hint for add supplier phone field in details activity [CHAR LIMIT=20] -->
     <string name="supplier_phone_edit_text_hint">Enter supplier phone</string>
+
+    <!-- Save menu label in details activity [CHAR LIMIT=10] -->
     <string name="action_save">Save</string>
+
+    <!-- Delete menu label in details activity [CHAR LIMIT=10] -->
     <string name="action_delete">Delete</string>
+
+    <!-- Toast when failed to insert new book to data base [CHAR LIMIT=None] -->
     <string name="insert_book_failed">Adding new book failed</string>
+
+    <!-- Toast when successed inserting new book to data base [CHAR LIMIT=None] -->
     <string name="insert_book_successful">Adding new book successful</string>
+
+    <!-- Toast when successed updating new book to data base [CHAR LIMIT=None] -->
     <string name="update_book_successful">Updating book was successful</string>
+
+    <!-- Toast when failed updating new book to data base [CHAR LIMIT=None] -->
     <string name="update_book_failed">Updating book was failed</string>
+
+    <!-- Toast when failed deleting the book from data base [CHAR LIMIT=None] -->
+    <string name="delete_book_failed">Deleting book was failed</string>
+
+    <!-- Toast when deleting the book from data base is successed[CHAR LIMIT=None] -->
+    <string name="delete_book_successful">Deleting book was successful</string>
 
     <!-- Toast message when reducing quantity of books in stock by selling one is failed [CHAR LIMIT=None] -->
     <string name="reducing_quantity_failed">Reducing quantity failed</string>
@@ -30,11 +77,14 @@
     <!-- Toast message when reducing quantity of books in stock by selling one is successed [CHAR LIMIT=None] -->
     <string name="reducing_quantity_success">Book sold</string>
 
+    <!-- Dialog message confirming deleting book [CHAR LIMIT=None] -->
     <string name="delete_dialog_msg">Delete this book?</string>
+
+    <!-- Delete button label in deleting dialog [CHAR LIMIT=10] -->
     <string name="delete">Delete</string>
+
+    <!-- Cancel button label in deleting dialog [CHAR LIMIT=10] -->
     <string name="cancel">Cancel</string>
-    <string name="delete_book_failed">Deleting book was failed</string>
-    <string name="delete_book_successful">Deleting book was successful</string>
 
     <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
     <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
