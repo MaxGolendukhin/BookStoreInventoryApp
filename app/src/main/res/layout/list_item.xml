@@ -30,14 +30,14 @@
             android:id="@+id/price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="4dp"
+            android:padding="@dimen/small_margin"
             android:textAppearance="?android:textAppearanceListItem"/>
 
         <TextView
             android:id="@+id/quantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="4dp"
+            android:padding="@dimen/small_margin"
             android:textAppearance="?android:textAppearanceListItem"/>
     </LinearLayout>
 

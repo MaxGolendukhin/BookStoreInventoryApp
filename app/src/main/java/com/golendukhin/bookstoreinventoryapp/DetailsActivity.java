@@ -43,18 +43,10 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     private Book initialStateBook;
     private Book currentStateBook;
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.details_activity);
-
-        //invalidateOptionsMenu();
-
-
 
         Intent intent = getIntent();
         bookUri = intent.getData();
@@ -67,7 +59,6 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             setTitle(R.string.details_book_title);
             getLoaderManager().initLoader(BOOKS_LOADER, null, this);
         }
-
 
         nameEditText = findViewById(R.id.name_edit_text);
         priceEditText = findViewById(R.id.price_edit_text);
@@ -82,11 +73,7 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         addQuantityButton = findViewById(R.id.add_quantity_button);
         reduceQuantityButton = findViewById(R.id.reduce_quantity_button);
 
-
-
-
         setButtonsListeners();
-
     }
 
     @Override

@@ -59,4 +59,10 @@
 
     <!--Button label sell item in catalog activity [CHAR LIMIT=10]-->
     <string name="sell_button_label">sell</string>
+
+    <!--Suggestion to add new books into inventory if it is empty [CHAR LIMIT=None]-->
+    <string name="empty_view_label">Please, press floating button in the corner to add books in the inventory</string>
+
+    <!--Button label sell item in catalog activity [CHAR LIMIT=None]-->
+    <string name="catalog_title">Books inventory catalog</string>
 </resources>

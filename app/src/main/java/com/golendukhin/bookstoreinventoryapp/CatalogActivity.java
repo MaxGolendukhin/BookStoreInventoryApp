@@ -38,18 +38,15 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.catalog_activity);
 
+        setTitle(R.string.catalog_title);
+
        cursor = getContentResolver().query(CONTENT_URI, null, null, null, null);
         booksInventoryCursorAdapter = new BooksInventoryCursorAdapter(this, cursor, 0);
         ListView listView = findViewById(R.id.list);
         listView.setAdapter(booksInventoryCursorAdapter);
 
-//        Button button = listView.findViewById(R.id.reduce_quantity_list_view_button);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
+        View emptyView = findViewById(R.id.empty_view);
+        listView.setEmptyView(emptyView);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -70,27 +67,25 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
             }
         });
 
-
-
         getLoaderManager().initLoader(BOOKS_LOADER, null, this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_insert_dummy_data:
-                DataBaseUtils.insertData(this);
-                //displayDatabaseContent();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.action_insert_dummy_data:
+//                DataBaseUtils.insertData(this);
+//                //displayDatabaseContent();
+//                return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
 //    /**
 //     * Displays content of database
@@ -140,77 +135,14 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 //        }
 //    }
 
-    public void buttonClicked(View view) {
-        Button button = (Button)view;
-        int position = (int)button.getTag();
-        int id = position + 1;
-        Uri uri = ContentUris.withAppendedId(CONTENT_URI, id);
-
-        cursor.move(position);
-
-
-
-
-//        cursor.moveToPosition(position);
-//        String bookTitle = cursor.getString(cursor.getColumnIndexOrThrow(BooksEntry.COLUMN_BOOKS_PRODUCT_NAME));
-//        String price = "price: $" + String.valueOf(1.0 * cursor.getInt(cursor.getColumnIndexOrThrow(BooksEntry.COLUMN_BOOKS_PRICE)) / 100);
-//        String quantity = "quantity: " + String.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow(BooksEntry.COLUMN_BOOKS_QUANTITY)));
-//        int a = 0;
-
-
-
-
-
-
-        String bookTitle = cursor.getString(cursor.getColumnIndexOrThrow(BooksEntry.COLUMN_BOOKS_PRODUCT_NAME));
-        int price = cursor.getInt(cursor.getColumnIndexOrThrow(BooksEntry.COLUMN_BOOKS_PRICE));
-        int quantity = cursor.getInt(cursor.getColumnIndexOrThrow(BooksEntry.COLUMN_BOOKS_QUANTITY));
-        String supplier = cursor.getString(cursor.getColumnIndexOrThrow(BooksEntry.COLUMN_BOOKS_SUPPLIER_NAME));
-        String supplierPhone = cursor.getString(cursor.getColumnIndexOrThrow(BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE));
-
-        if (quantity > 0) quantity--;
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(BooksEntry.COLUMN_BOOKS_PRODUCT_NAME, bookTitle);
-        contentValues.put(BooksEntry.COLUMN_BOOKS_PRICE, price);
-        contentValues.put(BooksEntry.COLUMN_BOOKS_QUANTITY, quantity);
-        contentValues.put(BooksEntry.COLUMN_BOOKS_SUPPLIER_NAME, supplier);
-        contentValues.put(BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE, supplierPhone);
-
-        int rowsAffected = getContentResolver().update(uri, contentValues, null, null);
-        if (rowsAffected == 0) {
-            // If no rows were affected, then there was an error with the update.
-            Toast.makeText(this, getString(R.string.reducing_quantity_failed),
-                    Toast.LENGTH_SHORT).show();
-        } else {
-            // Otherwise, the update was successful and we can display a toast.
-            Toast.makeText(this, getString(R.string.reducing_quantity_success),
-                    Toast.LENGTH_SHORT).show();
-        }
-
-       getContentResolver().update(uri, contentValues, null, null);
-
-    }
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-
-
         return new CursorLoader(this, CONTENT_URI, null, null, null, null);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-
-
-        cursor.moveToPosition(2);
-        String bookTitle = cursor.getString(cursor.getColumnIndexOrThrow(BooksEntry.COLUMN_BOOKS_PRODUCT_NAME));
-        String price = "price: $" + String.valueOf(1.0 * cursor.getInt(cursor.getColumnIndexOrThrow(BooksEntry.COLUMN_BOOKS_PRICE)) / 100);
-        String quantity = "quantity: " + String.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow(BooksEntry.COLUMN_BOOKS_QUANTITY)));
-        int a = 0;
-
-
-
         booksInventoryCursorAdapter.swapCursor(cursor);
     }
 
