@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
 
     <EditText
         android:id="@+id/name_edit_text"
@@ -12,11 +12,11 @@
         android:layout_marginEnd="@dimen/double_margin"
         android:layout_marginStart="@dimen/double_margin"
         android:layout_marginTop="@dimen/regular_margin"
+        android:hint="@string/book_name_edit_text_hint"
         android:textAppearance="?android:textAppearanceMedium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:hint="@string/book_name_edit_text_hint"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/price_label_text_view"
@@ -35,10 +35,10 @@
         android:layout_marginStart="@dimen/regular_margin"
         android:layout_marginTop="@dimen/double_margin"
         android:ems="10"
+        android:hint="@string/price_edit_text_hint"
         android:inputType="numberDecimal"
         app:layout_constraintStart_toEndOf="@+id/price_label_text_view"
-        app:layout_constraintTop_toBottomOf="@+id/name_edit_text"
-        android:hint="@string/price_edit_text_hint"/>
+        app:layout_constraintTop_toBottomOf="@+id/name_edit_text" />
 
     <Button
         android:id="@+id/reduce_price_button"
@@ -76,10 +76,10 @@
         android:layout_marginStart="@dimen/regular_margin"
         android:layout_marginTop="@dimen/double_margin"
         android:ems="10"
+        android:hint="@string/quantity_edit_text_hint"
         android:inputType="number"
         app:layout_constraintStart_toEndOf="@+id/quantity_label_text_view"
-        app:layout_constraintTop_toBottomOf="@+id/price_edit_text"
-        android:hint="@string/quantity_edit_text_hint"/>
+        app:layout_constraintTop_toBottomOf="@+id/price_edit_text" />
 
     <Button
         android:id="@+id/reduce_quantity_button"
@@ -113,14 +113,14 @@
         android:id="@+id/supplier_edit_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/regular_margin"
         android:layout_marginStart="@dimen/double_margin"
+        android:layout_marginTop="@dimen/regular_margin"
         android:ems="10"
+        android:hint="@string/supplier_edit_text_hint"
         android:textAppearance="?android:textAppearanceMedium"
         app:layout_constraintEnd_toEndOf="@+id/name_edit_text"
         app:layout_constraintStart_toEndOf="@+id/supplier_label_text_view"
-        app:layout_constraintTop_toBottomOf="@+id/quantity_edit_text"
-        android:hint="@string/supplier_edit_text_hint"/>
+        app:layout_constraintTop_toBottomOf="@+id/quantity_edit_text" />
 
     <TextView
         android:id="@+id/supplier_phone_number_title_text_view"
@@ -139,9 +139,20 @@
         android:layout_marginStart="@dimen/regular_margin"
         android:layout_marginTop="@dimen/double_margin"
         android:ems="10"
+        android:hint="@string/supplier_phone_edit_text_hint"
         android:inputType="phone"
         android:textAppearance="?android:textAppearanceMedium"
+        app:layout_constraintEnd_toStartOf="@+id/button"
         app:layout_constraintStart_toEndOf="@+id/supplier_phone_number_title_text_view"
-        app:layout_constraintTop_toBottomOf="@+id/supplier_edit_text"
-        android:hint="@string/supplier_phone_edit_text_hint"/>
+        app:layout_constraintTop_toBottomOf="@+id/supplier_edit_text" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="34dp"
+        android:layout_height="31dp"
+        android:background="@drawable/call_icon"
+        android:onClick="callSupplier"
+        app:layout_constraintBottom_toBottomOf="@+id/supplier_phone_number_edit_text"
+        app:layout_constraintEnd_toEndOf="@+id/supplier_edit_text"
+        app:layout_constraintTop_toTopOf="@+id/supplier_phone_number_edit_text" />
 </android.support.constraint.ConstraintLayout>

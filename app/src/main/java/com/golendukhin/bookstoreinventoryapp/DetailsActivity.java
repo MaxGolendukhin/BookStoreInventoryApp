@@ -442,4 +442,12 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             }
         });
     }
+
+    public void callSupplier(View view) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + currentStateBook.getSupplierPhone()));
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
 }

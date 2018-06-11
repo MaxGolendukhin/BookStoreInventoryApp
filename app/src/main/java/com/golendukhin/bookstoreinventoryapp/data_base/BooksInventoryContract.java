@@ -38,16 +38,44 @@ public final class BooksInventoryContract {
         public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE +
                 "/" + CONTENT_AUTHORITY + "/" + PATH_BOOKS_INVENTORY;
 
-        /** The content URI to access the pet data in the provider */
+        /**
+         * The content URI to access the pet data in the provider
+         */
         public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_BOOKS_INVENTORY);
 
+        /**
+         * Name of the data base where all information is stores
+         */
         public final static String TABLE_NAME = "books";
 
+        /**
+         * Name of the key column in {@link #TABLE_NAME} database
+         */
         public static final String _ID = BaseColumns._ID;
+
+        /**
+         * Name of the column with title of the book in {@link #TABLE_NAME} database
+         */
         public static final String COLUMN_BOOKS_PRODUCT_NAME = "productName";
+
+        /**
+         * Name of the column with price of the book in {@link #TABLE_NAME} database
+         */
         public static final String COLUMN_BOOKS_PRICE = "price";
+
+        /**
+         * Name of the column with quantity of the book in {@link #TABLE_NAME} database
+         */
         public static final String COLUMN_BOOKS_QUANTITY = "quantity";
+
+        /**
+         * Name of the column with name of supplier of the book in {@link #TABLE_NAME} database
+         */
         public static final String COLUMN_BOOKS_SUPPLIER_NAME = "supplierName";
+
+        /**
+         * Name of the column with supplier phone number of the book in {@link #TABLE_NAME} database
+         */
         public static final String COLUMN_BOOKS_SUPPLIER_PHONE = "supplierPhoneNumber";
     }
 }
