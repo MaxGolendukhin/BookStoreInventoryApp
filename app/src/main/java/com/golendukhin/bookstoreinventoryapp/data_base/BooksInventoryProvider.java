@@ -7,25 +7,24 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.golendukhin.bookstoreinventoryapp.data_base.BooksInventoryContract.BooksEntry;
 
-
-
 public class BooksInventoryProvider extends ContentProvider {
-
-    private BooksInventoryDBHelper booksInventoryDBHelper;
-
-    /** Tag for the log messages */
+    /**
+     * Tag for the log messages
+     */
     public static final String LOG_TAG = BooksInventoryProvider.class.getSimpleName();
-
-    /** URI matcher code for the content URI for the books inventory table */
+    /**
+     * URI matcher code for the content URI for the books inventory table
+     */
     private static final int BOOKS = 100;
-
-    /** URI matcher code for the content URI for a single item in the books inventory table */
+    /**
+     * URI matcher code for the content URI for a single item in the books inventory table
+     */
     private static final int BOOK_ID = 101;
-
     /**
      * UriMatcher object to match a content URI to a corresponding code.
      * The input passed into the constructor represents the code to return for the root URI.
@@ -41,8 +40,10 @@ public class BooksInventoryProvider extends ContentProvider {
                 BooksInventoryContract.PATH_BOOKS_INVENTORY + "/#", BOOK_ID);
     }
 
+    private BooksInventoryDBHelper booksInventoryDBHelper;
+
     /**
-     * Initialize the provider and the database helper object.
+     * Initializes the provider and the database helper object.
      */
     @Override
     public boolean onCreate() {
@@ -54,7 +55,7 @@ public class BooksInventoryProvider extends ContentProvider {
      * Perform the query for the given URI. Use the given projection, selection, selection arguments, and sort order.
      */
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
+    public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs,
                         String sortOrder) {
         // Get readable database
         SQLiteDatabase sqLiteDatabase = booksInventoryDBHelper.getReadableDatabase();
@@ -85,32 +86,35 @@ public class BooksInventoryProvider extends ContentProvider {
      * Returns the MIME type of data for the content URI.
      */
     @Override
-    public String getType(Uri uri) {
-            final int match = sUriMatcher.match(uri);
-            switch (match) {
-                case BOOKS:
-                    return BooksEntry.CONTENT_LIST_TYPE;
-                case BOOK_ID:
-                    return BooksEntry.CONTENT_ITEM_TYPE;
-                default:
-                    throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
-            }
+    public String getType(@NonNull Uri uri) {
+        final int match = sUriMatcher.match(uri);
+        switch (match) {
+            case BOOKS:
+                return BooksEntry.CONTENT_LIST_TYPE;
+            case BOOK_ID:
+                return BooksEntry.CONTENT_ITEM_TYPE;
+            default:
+                throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
+        }
     }
 
     /**
-     * Insert a bok item into the database with the given content values. Return the new content URI
+     * Insert a book item into the database with the given content values. Return the new content URI
      * for that specific row in the database.
+     *
+     * @param uri           path to database
+     * @param contentValues values to be inserted
+     * @return number of inserted rows
      */
     @Override
-    public Uri insert(Uri uri, ContentValues contentValues) {
-        // Check that the name is not null
+    public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
         String name = contentValues.getAsString(BooksEntry.COLUMN_BOOKS_PRODUCT_NAME);
         if (name == null) {
             throw new IllegalArgumentException("Book requires a name");
         }
 
         Integer price = contentValues.getAsInteger(BooksEntry.COLUMN_BOOKS_PRICE);
-        if (price != null && price < 0 ) {
+        if (price != null && price < 0) {
             throw new IllegalArgumentException("Book price has to be positive number");
         }
 
@@ -150,9 +154,14 @@ public class BooksInventoryProvider extends ContentProvider {
 
     /**
      * Delete the data at the given selection and selection arguments.
+     *
+     * @param uri           path to row in database
+     * @param selection     columns being deleted
+     * @param selectionArgs conditions by which rows are deleted
+     * @return number of deleted rows
      */
     @Override
-    public int delete(Uri uri, String selection, String[] selectionArgs) {
+    public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
         // Get writable database
         SQLiteDatabase sqLiteDatabase = booksInventoryDBHelper.getWritableDatabase();
 
@@ -182,21 +191,40 @@ public class BooksInventoryProvider extends ContentProvider {
         return rowsDeleted;
     }
 
+    /**
+     * Updates given row in database with new values
+     *
+     * @param uri           path to row in database
+     * @param contentValues values to be updated
+     * @param selection     columns being updated
+     * @param selectionArgs conditions by which database is updated
+     * @return quantity of updated rows
+     */
     @Override
-    public int update(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
+    public int update(@NonNull Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case BOOKS:
                 return updateBook(uri, contentValues, selection, selectionArgs);
             case BOOK_ID:
                 selection = BooksEntry._ID + "=?";
-                selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 return updateBook(uri, contentValues, selection, selectionArgs);
             default:
                 throw new IllegalArgumentException("Update is not supported for " + uri);
         }
     }
 
+    /**
+     * Helper method
+     * Checks if all updated values are valid and updates row in database
+     *
+     * @param uri           path to row in database
+     * @param contentValues values to be updated
+     * @param selection     columns being updated
+     * @param selectionArgs conditions by which database is updated
+     * @return quantity of updated rows
+     */
     private int updateBook(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
         if (contentValues.containsKey(BooksEntry.COLUMN_BOOKS_PRODUCT_NAME)) {
             String name = contentValues.getAsString(BooksEntry.COLUMN_BOOKS_PRODUCT_NAME);

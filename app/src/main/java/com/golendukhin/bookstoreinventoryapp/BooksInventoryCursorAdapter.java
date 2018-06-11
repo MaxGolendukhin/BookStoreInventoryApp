@@ -16,16 +16,25 @@ import android.widget.Toast;
 import com.golendukhin.bookstoreinventoryapp.data_base.BooksInventoryContract.BooksEntry;
 
 public class BooksInventoryCursorAdapter extends CursorAdapter {
-
-    public BooksInventoryCursorAdapter(Context context, Cursor cursor, int flags) {
+    BooksInventoryCursorAdapter(Context context, Cursor cursor, int flags) {
         super(context, cursor, flags);
     }
 
+    /**
+     * Creates new view to populate list_view
+     */
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
         return LayoutInflater.from(context).inflate(R.layout.list_item, viewGroup, false);
     }
 
+    /**
+     * Creates list view item from cursor
+     *
+     * @param view    parent view, which children are being populated with data
+     * @param context app context used to update quantity of books in inventory
+     * @param cursor  data source
+     */
     @Override
     public void bindView(View view, final Context context, Cursor cursor) {
         TextView bookTitleTextView = view.findViewById(R.id.book_title);
@@ -44,6 +53,10 @@ public class BooksInventoryCursorAdapter extends CursorAdapter {
         priceTextView.setText(price);
         quantityTextView.setText(quantityText);
         reduceQuantityButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Triggered if 'SELL' button is pressed
+             * Reduces quantity of book in inventory via list view
+             */
             @Override
             public void onClick(View view) {
                 if (quantity > 0) {

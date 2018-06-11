@@ -24,7 +24,6 @@ import android.widget.Toast;
 import com.golendukhin.bookstoreinventoryapp.data_base.BooksInventoryContract.BooksEntry;
 
 public class DetailsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
-
     private static final int BOOKS_LOADER = 0;
 
     private Uri bookUri;
@@ -43,6 +42,13 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     private Book initialStateBook;
     private Book currentStateBook;
 
+    /**
+     * Inflates details_activity
+     * Gets uri from intent
+     * Sets activity title whether book is being created or edited
+     * Initializes all views is activity
+     * Sets listeners to editTexts and buttons
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +61,6 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             initialStateBook = new Book();
             currentStateBook = new Book();
         } else {
-
             setTitle(R.string.details_book_title);
             getLoaderManager().initLoader(BOOKS_LOADER, null, this);
         }
@@ -76,11 +81,18 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         setButtonsListeners();
     }
 
-    @Override
+    /**
+     * Predefined by interface method
+     * Creates new loader
+     */
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         return new CursorLoader(this, bookUri, null, null, null, null);
     }
 
+    /**
+     * Predefined by interface method
+     * Updates state of activity views with new values
+     */
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         if (cursor.moveToFirst()) {
@@ -99,14 +111,22 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     public void onLoaderReset(Loader<Cursor> loader) {
     }
 
+    /**
+     * Inflate the menu options from the res/menu/details_menu.xml file.
+     * This adds menu items to the app bar.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu options from the res/menu/menu_editor.xml file.
-        // This adds menu items to the app bar.
         getMenuInflater().inflate(R.menu.details_menu, menu);
         return true;
     }
 
+    /**
+     * Before menu inflating checks mode of details activity
+     * If details activity is used to create new object, then delete options not required
+     * If state of initialStateBook is different to currentStateBook then
+     * 'Save' button is added to menu
+     */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
@@ -115,12 +135,16 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             MenuItem actionDeleteMenuItem = menu.findItem(R.id.action_delete);
             actionDeleteMenuItem.setVisible(false);
         }
+
         MenuItem actionSaveMenuItem = menu.findItem(R.id.action_save);
         actionSaveMenuItem.setVisible(!initialStateBook.isEqual(currentStateBook));
 
         return true;
     }
 
+    /**
+     * Responding to menu button clicks
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // User clicked on a menu option in the app bar overflow menu
@@ -136,21 +160,25 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
                 return true;
             // Respond to a click on the "Up" arrow button in the app bar
             case android.R.id.home:
-                // If the pet hasn't changed, continue with navigating up to parent activity
+                // If the book hasn't changed, continue with navigating up to parent activity
                 // which is the {@link CatalogActivity}.
                 if (initialStateBook.isEqual(currentStateBook)) {
                     NavUtils.navigateUpFromSameTask(DetailsActivity.this);
                     return true;
                 }
-                 //Otherwise if there are unsaved changes, setup a dialog to warn the user.
-                 //Create a click listener to handle the user confirming that
-                 //changes should be discarded.
+                //Otherwise if there are unsaved changes, setup a dialog to warn the user.
+                //Create a click listener to handle the user confirming that
+                //changes should be discarded.
                 showUnsavedChangesDialog();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Helper method
+     * Saves book via content resolver if "Save" menu item was pressed
+     */
     private void saveBook() {
         ContentValues contentValues = new ContentValues();
         contentValues.put(BooksEntry.COLUMN_BOOKS_PRODUCT_NAME, currentStateBook.getName());
@@ -161,7 +189,6 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
 
         if (bookUri == null) {
             Uri uri = getContentResolver().insert(BooksEntry.CONTENT_URI, contentValues);
-
             Toast.makeText(this, uri == null ?
                     getString(R.string.insert_book_failed) :
                     getString(R.string.insert_book_successful), Toast.LENGTH_SHORT).show();
@@ -179,7 +206,9 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         }
     }
 
-
+    /**
+     * Arises if user clicks "Delete" menu item to avoid unnecessary deletion by mistake
+     */
     private void showDeleteConfirmationDialog() {
         // Create an AlertDialog.Builder and set the message, and click listeners
         // for the positive and negative buttons on the dialog.
@@ -188,7 +217,7 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked the "Delete" button, so delete the pet.
-                deletePet();
+                deleteBook();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -208,7 +237,7 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     /**
      * Perform the deletion of the book in the database.
      */
-    private void deletePet() {
+    private void deleteBook() {
         // Only perform the delete if this is an existing book.
         if (bookUri != null) {
             // Call the ContentResolver to delete the book at the given content URI.
@@ -230,6 +259,9 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         }
     }
 
+    /**
+     * Arises if user clicks "Back" menu item and book state is not saved to warn not to loose unsaved data
+     */
     private void showUnsavedChangesDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.unsaved_changes_dialog_msg);
@@ -253,6 +285,9 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         alertDialog.show();
     }
 
+    /**
+     * Sets edit text listeners
+     */
     private void setEditTextListeners() {
         nameEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -263,6 +298,9 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
 
+            /**
+             * If title of the book is changed then menu is to be updated
+             */
             @Override
             public void afterTextChanged(Editable editable) {
                 currentStateBook.setName(editable.toString().trim());
@@ -279,6 +317,11 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
 
+            /**
+             * Validates sum input by user
+             * If it is not correct sum is set to null
+             * Also updates state of currentStateBook and updates menu if needed
+             */
             @Override
             public void afterTextChanged(Editable editable) {
                 String priceText = priceEditText.getText().toString();
@@ -296,6 +339,13 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         });
 
         priceEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            /**
+             * Triggered when edit text looses focus
+             * To be sure price will be displayed properly despite what user has input
+             * If there are more then two decimal places, user will be warned that price will be rounded up to two places
+             * If price is zero, then hint will be displayed
+             * If user ha input any incorrect, unparsable value, it will be set to  zero
+             */
             @Override
             public void onFocusChange(View view, boolean b) {
                 if (!b) {
@@ -333,9 +383,12 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
 
+            /**
+             * Validates menu if edit text is updated
+             */
             @Override
             public void afterTextChanged(Editable editable) {
-                int quantity  = 0;
+                int quantity = 0;
                 //if user leaves field blank, it is impossible to convert to integer
                 if (!editable.toString().equals("")) {
                     quantity = Integer.valueOf(editable.toString());
@@ -346,6 +399,10 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         });
 
         quantityEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            /**
+             * Triggered after edit text has lost its focus
+             * Validates input value and if it is zero, then need to empty value
+             */
             @Override
             public void onFocusChange(View view, boolean b) {
                 if (!b) {
@@ -366,6 +423,9 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
 
+            /**
+             * If supplier name is changed then menu is to be updated
+             */
             @Override
             public void afterTextChanged(Editable editable) {
                 currentStateBook.setSupplier(editable.toString().trim());
@@ -382,6 +442,9 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
 
+            /**
+             * If supplier phone number is changed then menu is to be updated
+             */
             @Override
             public void afterTextChanged(Editable editable) {
                 currentStateBook.setSupplierPhone(editable.toString().trim());
@@ -390,8 +453,15 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         });
     }
 
+    /**
+     * Sets listeners to buttons
+     */
     private void setButtonsListeners() {
         addPriceButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Triggered when "Add price" button is clicked
+             * Increases price to one $
+             */
             @Override
             public void onClick(View view) {
                 double price = currentStateBook.getPrice();
@@ -402,6 +472,10 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         });
 
         reducePriceButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Triggered when "Reduce price" button is clicked
+             * Decreases price with one $
+             */
             @Override
             public void onClick(View view) {
                 double price = currentStateBook.getPrice();
@@ -418,6 +492,10 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         });
 
         addQuantityButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Triggered when "Add quantity" button is pressed
+             * Increases quantity with one item
+             */
             @Override
             public void onClick(View view) {
                 int quantity = currentStateBook.getQuantity();
@@ -428,6 +506,10 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         });
 
         reduceQuantityButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Triggered when "Reduce quantity" button is pressed
+             * Decreases quantity with one item
+             */
             @Override
             public void onClick(View view) {
                 int quantity = currentStateBook.getQuantity();
@@ -443,6 +525,10 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         });
     }
 
+    /**
+     * XML predefined method
+     * Called if "Call" button is pressed via details activity
+     */
     public void callSupplier(View view) {
         Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse("tel:" + currentStateBook.getSupplierPhone()));

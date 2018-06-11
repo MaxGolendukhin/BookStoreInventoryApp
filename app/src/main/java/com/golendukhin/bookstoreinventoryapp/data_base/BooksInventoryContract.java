@@ -7,14 +7,13 @@ import android.provider.BaseColumns;
 import com.golendukhin.bookstoreinventoryapp.R;
 
 public final class BooksInventoryContract {
-
     public static final String CONTENT_AUTHORITY = "com.golendukhin.bookstoreinventoryapp";
 
     /**
      * Use CONTENT_AUTHORITY to create the base of all URI's which apps will use to contact
      * the content provider.
      */
-    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+    static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     public static final String PATH_BOOKS_INVENTORY = "booksInventory";
 
