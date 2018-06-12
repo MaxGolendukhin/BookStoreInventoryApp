@@ -13,6 +13,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -151,8 +152,9 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         switch (item.getItemId()) {
             // Respond to a click on the "Save" menu option
             case R.id.action_save:
-                saveBook();
-                finish();
+                if (saveBook()) {
+                    finish();
+                }
                 return true;
             // Respond to a click on the "Delete" menu option
             case R.id.action_delete:
@@ -179,13 +181,42 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
      * Helper method
      * Saves book via content resolver if "Save" menu item was pressed
      */
-    private void saveBook() {
+    private boolean saveBook() {
+        String bookName = currentStateBook.getName();
+        int price = (int) currentStateBook.getPrice() * 100;
+        int quantity = currentStateBook.getQuantity();
+        String supplier = currentStateBook.getSupplier();
+        String supplierPhone = currentStateBook.getSupplierPhone();
+
+        if (currentStateBook.hasEmptyFields()) {
+            if (TextUtils.isEmpty(bookName)) {
+                nameEditText.setError(getString(R.string.book_needs_name_prompt));
+            }
+
+            if (price == 0) {
+                priceEditText.setError(getString(R.string.book_needs_price_prompt));
+            }
+
+            if (quantity == 0) {
+                quantityEditText.setError(getString(R.string.book_needs_quantity_prompt));
+            }
+
+            if (TextUtils.isEmpty(supplier)) {
+                supplierEditText.setError(getString(R.string.book_needs_supplier_prompt));
+            }
+
+            if (TextUtils.isEmpty(supplierPhone)) {
+                supplierPhoneEditText.setError(getString(R.string.book_needs_supplier_phone_number_prompt));
+            }
+            return false;
+        }
+
         ContentValues contentValues = new ContentValues();
-        contentValues.put(BooksEntry.COLUMN_BOOKS_PRODUCT_NAME, currentStateBook.getName());
-        contentValues.put(BooksEntry.COLUMN_BOOKS_PRICE, currentStateBook.getPrice() * 100);
-        contentValues.put(BooksEntry.COLUMN_BOOKS_QUANTITY, currentStateBook.getQuantity());
-        contentValues.put(BooksEntry.COLUMN_BOOKS_SUPPLIER_NAME, currentStateBook.getSupplier());
-        contentValues.put(BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE, currentStateBook.getSupplierPhone());
+        contentValues.put(BooksEntry.COLUMN_BOOKS_PRODUCT_NAME, bookName);
+        contentValues.put(BooksEntry.COLUMN_BOOKS_PRICE, price);
+        contentValues.put(BooksEntry.COLUMN_BOOKS_QUANTITY, quantity);
+        contentValues.put(BooksEntry.COLUMN_BOOKS_SUPPLIER_NAME, supplier);
+        contentValues.put(BooksEntry.COLUMN_BOOKS_SUPPLIER_PHONE, supplierPhone);
 
         if (bookUri == null) {
             Uri uri = getContentResolver().insert(BooksEntry.CONTENT_URI, contentValues);
@@ -204,6 +235,7 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
                         Toast.LENGTH_SHORT).show();
             }
         }
+        return true;
     }
 
     /**

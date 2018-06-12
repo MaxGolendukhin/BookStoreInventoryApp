@@ -1,6 +1,7 @@
 package com.golendukhin.bookstoreinventoryapp;
 
 import android.database.Cursor;
+import android.text.TextUtils;
 
 import com.golendukhin.bookstoreinventoryapp.data_base.BooksInventoryContract;
 
@@ -24,7 +25,7 @@ class Book {
     }
 
     /**
-     * Constructor to initialize Book object based on another obe
+     * Constructor to initialize Book object based on another object
      * @param book earlier defined object
      */
     Book(Book book) {
@@ -103,5 +104,29 @@ class Book {
                 book.getQuantity() == this.quantity &&
                 book.getSupplier().equals(this.supplier) &&
                 book.getSupplierPhone().equals(this.supplierPhone);
+    }
+
+    /**
+     * Method for item validation before saving
+     * @return true if any of any of fields has default values, false otherwise
+     */
+    boolean hasEmptyFields() {
+        if (TextUtils.isEmpty(this.name)) {
+            return true;
+        }
+
+        if (price == 0) {
+            return true;
+        }
+
+        if (quantity == 0) {
+            return true;
+        }
+
+        if (TextUtils.isEmpty(this.supplier)) {
+            return true;
+        }
+
+        return TextUtils.isEmpty(this.supplierPhone);
     }
 }

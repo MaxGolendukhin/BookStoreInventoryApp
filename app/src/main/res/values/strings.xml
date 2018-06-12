@@ -115,4 +115,24 @@
 
     <!--Button label sell item in catalog activity [CHAR LIMIT=None]-->
     <string name="catalog_title">Books inventory catalog</string>
+
+    <!--Prompt when book name is not filled [CHAR LIMIT=None]-->
+    <string name="book_needs_name_prompt">Please, fill book name before saving</string>
+
+    <!--Prompt when book price is not filled [CHAR LIMIT=None]-->
+    <string name="book_needs_price_prompt">Please, fill book price before saving</string>
+
+    <!--Prompt when book quantity is not filled [CHAR LIMIT=None]-->
+    <string name="book_needs_quantity_prompt">Please, fill book quantity before saving</string>
+
+    <!--Prompt when book supplier is not filled [CHAR LIMIT=None]-->
+    <string name="book_needs_supplier_prompt">Please, fill book\'s supplier before saving</string>
+
+    <!--Prompt when supplier phone number is not filled [CHAR LIMIT=None]-->
+    <string name="book_needs_supplier_phone_number_prompt">Please, fill supplier\'s phone number before saving</string>
+
+
+
+
+
 </resources>
